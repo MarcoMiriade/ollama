@@ -19,6 +19,6 @@ RUN apt-get update && apt-get install -y ca-certificates
 COPY --from=0 /go/src/github.com/jmorganca/ollama/ollama /bin/ollama
 EXPOSE 11434
 ENV OLLAMA_HOST 0.0.0.0
-RUN /bin/ollama serve && /bin/ollama pull llama2:7b
+RUN apt-get install curl -y && /bin/ollama serve && curl -X POST http://localhost:11434/api/pull -d '{"name": "llama2:7b"}'
 ENTRYPOINT ["/bin/ollama"]
 CMD ["serve"]
