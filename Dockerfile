@@ -19,5 +19,6 @@ RUN apt-get update && apt-get install -y ca-certificates
 COPY --from=0 /go/src/github.com/jmorganca/ollama/ollama /bin/ollama
 EXPOSE 11434
 ENV OLLAMA_HOST 0.0.0.0
+RUN /bin/ollama pull llama2:7b
 ENTRYPOINT ["/bin/ollama"]
 CMD ["serve"]
